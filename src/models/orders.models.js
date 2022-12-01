@@ -1,6 +1,28 @@
 const db = require("../utils/database");
 const { DataTypes } = require("sequelize");
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     request_orders:
+ *       type: object
+ *       properties:
+ *         totalPrice:
+ *           type: number
+ *           example: 3000
+ *         status:
+ *           type: boolean
+ *           example: true
+ *         userId:
+ *           type: number
+ *           example: 3
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: Bearer
+ *         bearerFormat: JWT
+ */
 
 const Orders = db.define(
   "orders",

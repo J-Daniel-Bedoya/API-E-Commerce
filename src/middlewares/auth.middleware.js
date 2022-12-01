@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { json } = require("sequelize");
 require("dotenv").config();
 
 const authenticate = (req, res, next) => {
@@ -18,6 +19,8 @@ const authenticate = (req, res, next) => {
         message: "Invalid Token",
       });
     }
+  } else{
+    res.json({message: "No token provide"})
   }
 };
 

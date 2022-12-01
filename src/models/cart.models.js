@@ -1,6 +1,28 @@
 const db = require("../utils/database");
 const { DataTypes } = require("sequelize");
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     request_cart:
+ *       type: object
+ *       properties:
+ *         totalPrice:
+ *           type: number
+ *           example: 3000
+ *         status: 
+ *           type: boolean
+ *           example: true
+ *         userId:
+ *           type: number
+ *           example: 3
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: Bearer
+ *         bearerFormat: JWT
+ */
 
 const Cart = db.define(
   "cart",
@@ -15,6 +37,11 @@ const Cart = db.define(
       type: DataTypes.INTEGER,
       field: "total_price",
       allowNull: false,
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
     userId: {
       type: DataTypes.INTEGER,

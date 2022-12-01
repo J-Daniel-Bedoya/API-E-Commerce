@@ -9,37 +9,28 @@ const bcrypt = require("bcrypt");
  *     users:
  *       type: object
  *       properties:
- *         firstname:
+ *         username:
  *           type: string
- *           example: Ian
- *         lastname:
- *           type: string
- *           example: Rosas
+ *           example: Jose Daniel
  *         email:
  *           type: string
- *           example: ian@gmail.com
+ *           example: josedaniel@gmail.com
  *     register:
  *       type: object
  *       properties:
- *         firstname:
+ *         username:
  *           type: string
- *           example: Ian
- *         lastname:
- *           type: string
- *           example: Rosas
+ *           example: Jose Daniel
  *         email:
  *           type: string
- *           example: ian@gmail.com
- *         phone:
- *           type: string
- *           example: 0000000000
+ *           example: josedaniel@gmail.com
  *         password:
  *           type: string
  *           example: 1234
  *   securitySchemes:
  *     bearerAuth:
  *       type: http
- *       scheme: bearer
+ *       scheme: Bearer
  *       bearerFormat: JWT
  */
 
@@ -58,11 +49,11 @@ const Users = db.define(
     },
     email: {
       type: DataTypes.STRING,
-      // unique: true,
+      unique: true,
       allowNull: false,
-      // validate: {
-      //   isEmail: true,
-      // },
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: DataTypes.STRING,

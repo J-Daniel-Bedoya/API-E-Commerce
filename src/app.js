@@ -28,11 +28,11 @@ db.sync({ alter: true })
   .then(() => console.log('Conexión exitosa'))
   .catch((err) => console.log(err))
   
-transporter
-.verify() // devuelve una promesa
-.then(() =>
-  console.log("Listo para regitrar")
-);
+// transporter
+// .verify() // devuelve una promesa
+// .then(() =>
+//   console.log("Listo para regitrar")
+// );
 
 app.get('/', (req, res) => {
   res.status(200).json('Respuesta exitosa')

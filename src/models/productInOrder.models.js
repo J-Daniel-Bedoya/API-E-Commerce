@@ -5,48 +5,42 @@ const { DataTypes } = require("sequelize");
  * @openapi
  * components:
  *   schemas:
- *     request_product:
+ *     request_order:
  *       type: object
  *       properties:
- *         name:
- *           type: string
- *           example: Alpinito
+ *         quantity:
+ *           type: number
+ *           example: 6
  *         price:
  *           type: number
- *           example: 4000
- *         image:
- *           type: string
- *           example: https://bit.ly/3Y1d0I7
- *         availableQty:
- *           type: number
- *           example: 5
+ *           example: 23000
  *         status:
  *           type: boolean
  *           example: true
- *         userId:
+ *         orderId:
  *           type: number
- *           example: 1
- *     create_product:
+ *           example: 4
+ *         productId:
+ *           type: string
+ *           example: 2
+ *     create_order:
  *       type: object
  *       properties:
- *         name:
- *           type: string
- *           example: Alpinito
+ *         quantity:
+ *           type: number
+ *           example: 6
  *         price:
  *           type: number
- *           example: 4000
- *         image:
- *           type: string
- *           example: https://bit.ly/3Y1d0I7
- *         availableQty:
- *           type: number
- *           example: 5
+ *           example: 23000
  *         status:
  *           type: boolean
  *           example: true
- *         userId:
+ *         orderId:
  *           type: number
- *           example: 1
+ *           example: 4
+ *         productId:
+ *           type: string
+ *           example: 2
  *     securitySchemes:
  *       bearerAuth:
  *         type: http
@@ -54,8 +48,8 @@ const { DataTypes } = require("sequelize");
  *         bearerFormat: JWT
  */
 
-const Products = db.define(
-  "products",
+const ProductsInOrder = db.define(
+  "productsInOrder",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -63,36 +57,32 @@ const Products = db.define(
       autoIncrement: true,
       allowNull: false,
     },
-    name: {
-      type: DataTypes.STRING,
+    quantity: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    availableQty: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      field: "available_qty",
-    },
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
     },
-    userId: {
+    orderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      field: "user_id",
-    }
+      field: "order_id",
+    },
+    productId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      field: "product_id",
+    },
   }, {
     timestamps: false,
   }
 );
 
-module.exports = Products;
+module.exports = ProductsInOrder;

@@ -2,22 +2,23 @@ const { Users, Products } = require("../models");
 
 class ProductsServices {
 
-  static async getProd() {
+  static async getProd(offset, limit) {
     try {
-      const result = await Products.findAll({
-        
-        attributes: {
-          exclude: ["userId", "user_id"]
-        },
-        include: {
-          model: Users,
-          as: "user",
-          attributes: ["username"]
-        }
-      });
-      return result;
+        const result = await Products.findAll({
+          attributes: {
+            exclude: ["userId", "user_id"]
+          },
+          include:{
+            model: Users,
+            as: "user",
+            attributes: ["username"]
+          },
+          offset,
+          limit,
+        });
+        return result;
     } catch (error) {
-      throw error;
+        throw(error); 
     }
   }
   static async createProd(body) {

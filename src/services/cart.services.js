@@ -2,9 +2,10 @@ const { Cart, ProductInCart } = require("../models");
 
 class CartServices {
 
-  static async readCart() {
+  static async readCart(id) {
     try {
-      const result = await Cart.findAll({
+      const result = await Cart.findOne({
+        where: { id },
         attributes: {
           exclude: ["userId", "user_id"]
         },

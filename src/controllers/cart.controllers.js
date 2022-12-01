@@ -2,7 +2,8 @@ const { CartServices } = require("../services");
 
 const seeCart = async (req, res, next) => {
   try {
-    const result = await CartServices.readCart();
+    const { id }  = req.params;
+    const result = await CartServices.readCart(id);
     res.json(result);
   } catch (error) {
     next({
@@ -25,7 +26,6 @@ const addProducts = async (req, res, next) => {
     });
   }
 }
-
 
 
 module.exports = {
