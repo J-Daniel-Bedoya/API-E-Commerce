@@ -3,7 +3,7 @@ const { DataTypes } = require("sequelize");
 
 
 const ProductInCart = db.define(
-  "productInCart",
+  "productsInCart",
   {
     id: {
       type: DataTypes.INTEGER,

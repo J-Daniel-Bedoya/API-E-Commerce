@@ -15,7 +15,7 @@ const initModels = () => {
   //U:M 
 
   Orders.belongsTo(Users, { as: "compra", foreignKey: "user_id" });
-  Users.hasMany(Orders, { as: "comprador", foreignKey: "user_id" });
+  Users.hasMany(Orders, { as: "orders", foreignKey: "user_id" });
 
   // M:M
 
@@ -28,7 +28,7 @@ const initModels = () => {
   // M:M
 
   ProductInCart.belongsTo(Cart, { foreignKey: "cart_id" })
-  Cart.hasMany(ProductInCart, { foreignKey: "cart_id" })
+  Cart.hasMany(ProductInCart, { as: "products", foreignKey: "cart_id" })
 
   ProductInCart.belongsTo(Products, { foreignKey: "product_id" })
   Products.hasMany(ProductInCart, { foreignKey: "product_id" })

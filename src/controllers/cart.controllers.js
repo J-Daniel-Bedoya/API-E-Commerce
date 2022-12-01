@@ -1,9 +1,8 @@
-const { ProductServices } = require("../services");
+const { CartServices } = require("../services");
 
-const addProducts = async (req, res, next) => {
+const seeCart = async (req, res, next) => {
   try {
-    const body = req.body;
-    const result = await ProductServices.createProd(body);
+    const result = await CartServices.readCart();
     res.json(result);
   } catch (error) {
     next({
@@ -12,8 +11,24 @@ const addProducts = async (req, res, next) => {
       message: "Algo salio mal",
     });
   }
-};
+}
+const addProducts = async (req, res, next) => {
+  try {
+    const body = req.body;
+    const result = await CartServices.addCart(body);
+    res.json(result);
+  } catch (error) {
+    next({
+      status: 400,
+      errorContent: error,
+      message: "Algo salio mal",
+    });
+  }
+}
+
+
 
 module.exports = {
-  addProducts
+  addProducts,
+  seeCart,
 };

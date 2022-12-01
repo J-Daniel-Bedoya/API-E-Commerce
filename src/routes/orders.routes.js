@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const authenticate = require("../middlewares/auth.middleware");
-const { userRegister, getUser } = require("../controllers");
+const { createOrder, getOrder } = require("../controllers");
 
-router.post("/users/register", userRegister);
-router.get("/users/:id", authenticate, getUser);
+router.post("/orders", createOrder)
+
+router.get("/users/:id/orders", getOrder);
 
 module.exports = router;

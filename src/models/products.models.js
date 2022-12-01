@@ -21,7 +21,7 @@ const Products = db.define(
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     availableQty: {
       type: DataTypes.INTEGER,
@@ -35,7 +35,7 @@ const Products = db.define(
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       field: "user_id",
     },
   }, {

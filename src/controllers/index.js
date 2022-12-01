@@ -1,7 +1,8 @@
 const { userLogin } = require("./auth.controllers");
 const {userRegister, getUser} = require("./users.controllers");
 const { getProducts, createProducts } = require("./products.controllers");
-const { addProducts } = require("./cart.controllers");
+const { addProducts, seeCart } = require("./cart.controllers");
+const { createOrder, getOrder } = require("./orders.controllers");
 
 module.exports = {
   userLogin,
@@ -10,4 +11,7 @@ module.exports = {
   getProducts,
   createProducts,
   addProducts,
+  seeCart,
+  createOrder,
+  getOrder,
 }

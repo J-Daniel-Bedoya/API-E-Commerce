@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const authenticate = require("../middlewares/auth.middleware");
-const { addProducts } = require("../controllers");
+const { addProducts, seeCart } = require("../controllers");
 
-router.post("/cart", authenticate, addProducts)
+router.get("/cart", seeCart)
+
+router.post("/cart/addProduct", addProducts)
 
 module.exports = router;

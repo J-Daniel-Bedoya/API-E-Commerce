@@ -1,10 +1,19 @@
 const { UserServices } = require("../services");
+const transporter = require("../utils/mailter");
 
 const userRegister = async (req, res, next) => {
   try {
     const newUser = req.body;
-    const result = await UserServices.create(newUser);
+    const result = await UserServices.createUser(newUser);
     res.status(201).json(result);
+
+    transporter.sendMail({
+      from: "<jbedoyachavarriaga@gmail.com>",
+      to: result.email,
+      subject: "Bienvenido My shop",
+      text: `Hola ${result.username} bienvenido a la mejor tienda de productos online`,
+      // html: welcomeTemplate(result.firstname, result.lastname),
+    });
   } catch (error) {
     next({
       status: 400,

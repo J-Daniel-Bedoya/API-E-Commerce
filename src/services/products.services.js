@@ -1,6 +1,6 @@
 const { Users, Products } = require("../models");
 
-class UserServices {
+class ProductsServices {
 
   static async getProd() {
     try {
@@ -30,4 +30,4 @@ class UserServices {
   }
 }
 
-module.exports = UserServices;
+module.exports = ProductsServices;

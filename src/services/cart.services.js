@@ -1,33 +1,35 @@
-const { Products, Cart } = require("../models");
+const { Cart, ProductInCart } = require("../models");
 
-class UserServices {
+class CartServices {
 
-  static async getProd() {
+  static async readCart() {
     try {
-      const result = await Products.findAll({
-        
+      const result = await Cart.findAll({
         attributes: {
           exclude: ["userId", "user_id"]
         },
         include: {
-          model: Users,
-          as: "user",
-          attributes: ["username"]
-        }
+          model: ProductInCart,
+          as: "products",
+          attributes: {
+            exclude: ["cartId", "cart_id", "productId", "product_id"]
+          }
+        },
       });
       return result;
     } catch (error) {
       throw error;
     }
   }
-  static async createProd(body) {
+  static async addCart(product) {
     try {
-      const result = await Products.create(body);
+      const result = await ProductInCart.create(product);
       return result;
     } catch (error) {
       throw error;
     }
   }
+
 }
 
-module.exports = UserServices;
+module.exports = CartServices;
