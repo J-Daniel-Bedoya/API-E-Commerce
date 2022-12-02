@@ -17,7 +17,7 @@ const addProducts = async (req, res, next) => {
   try {
     const body = req.body;
     const result = await CartServices.addCart(body);
-    res.json(result);
+    res.status(201).json(result);
   } catch (error) {
     next({
       status: 400,

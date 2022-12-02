@@ -6,9 +6,9 @@ const options = {
   definition: {
     openapi: "3.0.0", 
     info: {
-      title: "E-Commerce API",
+      title: "API E-Commerce",
       version: "1.0.0",
-      description: "API para la venta de productos online.",
+      description: "API for the sale of products online.",
     },
   },
   apis: [
@@ -32,10 +32,7 @@ const swaggerSpec = swaggerJSDoc(options);
 const swaggerDocs = (app, port) => {
 
   app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-  
-  console.log(
-    `Documentación disponible en http://localhost:${port}/api/v1/docs`
-  );
+
 };
 
 module.exports = swaggerDocs; 

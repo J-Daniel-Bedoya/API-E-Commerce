@@ -5,7 +5,7 @@ const createOrder = async (req, res, next) => {
   try {
     const body = req.body;
     const result = await OrdersServices.postOrder(body);
-    res.json(result);
+    res.status(201).json(result);
 
   } catch (error) {
     next({
