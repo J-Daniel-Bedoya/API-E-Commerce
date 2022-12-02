@@ -19,7 +19,7 @@ const createOrder = async (req, res, next) => {
 const getOrder = async (req, res, next) => {
   try {
     const { id } = req.params
-    const result = await OrdersServices.getAll(id);
+    const result = await OrdersServices.getOrder(id);
     res.json(result);
   } catch (error) {
     next({

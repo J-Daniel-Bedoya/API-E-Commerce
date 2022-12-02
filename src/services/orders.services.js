@@ -28,7 +28,7 @@ class OrdersServices {
       throw error;
     }
   }
-  static async getAll(id) {
+  static async getOrder(id) {
     try {
       const result = await Users.findOne({
         where: { id },
@@ -37,7 +37,7 @@ class OrdersServices {
           model: Orders,
           as: "orders",
           attributes: {
-            exclude: ["userId"]
+            exclude: ["userId", "user_id"]
           }
         }
       });
