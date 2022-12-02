@@ -3,13 +3,13 @@ const transporter = require("../utils/mailter");
 
 class OrdersServices {
 
-  static async postOrder(body) {
+  static async postOrder(id, body) {
     try {
       const createOrder = await Orders.create({
         totalPrice: body.totalPrice,
         status: body.status,
-        userId: body.userId,
-        user_id: body.userId
+        userId: id,
+        user_id: id,
       })
 
       const result = await ProductsInOrder.create({...body, orderId: createOrder.id});

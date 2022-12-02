@@ -5,7 +5,7 @@ const { createOrder, getOrder } = require("../controllers");
 
 /**
  * @openapi
- * /api/v1/orders/create:
+ * /api/v1/users/{id}/orders/create:
  *   post:
  *     summary: Create a order in the app
  *     tags: [Order]
@@ -62,7 +62,7 @@ const { createOrder, getOrder } = require("../controllers");
  *                     $ref: "#/components/schemas/request_order"
  */
 
-router.post("/orders/create", createOrder)
+router.post("/users/:id/orders/create", createOrder)
 
 router.get("/users/:id/orders", authenticate, getOrder);
 

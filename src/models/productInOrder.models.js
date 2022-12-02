@@ -35,9 +35,6 @@ const { DataTypes } = require("sequelize");
  *         status:
  *           type: boolean
  *           example: true
- *         orderId:
- *           type: number
- *           example: 1
  *         productId:
  *           type: string
  *           example: 1
@@ -77,7 +74,7 @@ const ProductsInOrder = db.define(
     },
     productId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       field: "product_id",
     },
   }, {
