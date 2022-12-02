@@ -24,6 +24,9 @@ const options = {
     "./src/routes/orders.routes.js",
     "./src/models/productInOrder.models.js",
 
+    "./src/routes/auth.routes.js",
+    "./src/models/auth.models.js"
+
   ],
 };
 

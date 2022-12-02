@@ -27,6 +27,27 @@ const bcrypt = require("bcrypt");
  *         password:
  *           type: string
  *           example: 1234
+ *     login:
+ *       type: object
+ *       properties:
+ *         email:
+ *           type: string
+ *           example: josedaniel@gmail.com
+ *         password:
+ *           type: string
+ *           example: 1234
+ *     request_auth:
+ *       type: object
+ *       properties:
+ *         username:
+ *           type: string
+ *           example: Jose Daniel
+ *         email:
+ *           type: string
+ *           example: josedaniel@gmail.com
+ *         token:
+ *           type: string
+ *           example: "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impvc2VkYW5pZWxAZ21haWwuY29tIiwiaWQiOjQsImlhdCI6MTY2OTk0NjUxMH0.A2LDZITpnpeuJR-xncOShWtFWqdR45kNjBJ5aV4GZDyy1JS83wSPh8YCUWJIlXsotLyh7fkEHTOtGhaW70g87g"
  *   securitySchemes:
  *     bearerAuth:
  *       type: http

@@ -11,7 +11,7 @@ const getProducts = async (req, res, next) => {
             productsAvailable.push(e)
         }
     })
-    res.status(201).json(productsAvailable);
+    res.json(productsAvailable);
   } catch (error) {
     next({
         message: 'no se pudo obtener los productos',
@@ -24,7 +24,7 @@ const createProducts = async (req, res, next) => {
   try {
     const body = req.body;
     const result = await ProductsServices.createProd(body);
-    res.json(result);
+    res.status(201).json(result);
   } catch (error) {
     next({
       status: 400,
