@@ -36,7 +36,11 @@ db.sync({ alter: true })
 // );
 
 app.get('/', (req, res) => {
-  res.status(200).json(`Prueva esta API con swagger en el siguiente link: ${process.env.HOST}`)
+  res.status(200).json({
+    status: "Respuesta exitosa",
+    description: "Prueva esta API con SWAGGER en el siguiente 'link'", 
+    link: process.env.HOST
+  })
 });
 
 app.use("/api/v1", authRouter);
