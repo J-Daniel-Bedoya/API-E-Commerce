@@ -19,10 +19,10 @@ const { DataTypes } = require("sequelize");
  *           example: true
  *         orderId:
  *           type: number
- *           example: 4
+ *           example: 1
  *         productId:
  *           type: string
- *           example: 2
+ *           example: 1
  *     create_order:
  *       type: object
  *       properties:
@@ -37,10 +37,10 @@ const { DataTypes } = require("sequelize");
  *           example: true
  *         orderId:
  *           type: number
- *           example: 4
+ *           example: 1
  *         productId:
  *           type: string
- *           example: 2
+ *           example: 1
  *     securitySchemes:
  *       bearerAuth:
  *         type: http
