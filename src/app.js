@@ -36,7 +36,7 @@ db.sync({ alter: true })
 // );
 
 app.get('/', (req, res) => {
-  res.status(200).json(`Prueva esta API con swagger ${process.env.HOST}`)
+  res.status(200).json(`Prueva esta API con swagger en el siguiente link: ${process.env.HOST}`)
 });
 
 app.use("/api/v1", authRouter);
@@ -44,6 +44,7 @@ app.use("/api/v1", usersRoutes);
 app.use("/api/v1", productsRoutes);
 app.use("/api/v1", cartRoutes);
 app.use("/api/v1", ordersRoutes);
+
   
 app.use(handleError);
 module.exports = app;

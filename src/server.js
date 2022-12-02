@@ -5,7 +5,7 @@ require("dotenv").config();
 const PORT = process.env.PORT;
   
 const server = app.listen(PORT, () => {
-  console.log(`Servidor iniciado en el PORT: ${PORT}`);
+  console.log(`Servidor iniciado en http://localhost:${PORT}/`);
   swaggerDocs(app, PORT);
 });
 
