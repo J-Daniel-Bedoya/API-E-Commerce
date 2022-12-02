@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require("cors");
 const db = require('./utils/database');
 const handleError = require("./middlewares/error");
+require("dotenv").config();
 const { 
   authRouter, 
   usersRoutes, 
@@ -35,7 +36,7 @@ db.sync({ alter: true })
 // );
 
 app.get('/', (req, res) => {
-  res.status(200).json('Respuesta exitosa')
+  res.status(200).json(`Prueva esta API con swagger ${process.env.HOST}`)
 });
 
 app.use("/api/v1", authRouter);
