@@ -16,6 +16,14 @@ const { createOrder, getOrder } = require("../controllers");
  *         application/json:
  *           schema:
  *             $ref: "#/components/schemas/create_order"
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: user Id
  *     responses:
  *       201:
  *         description: create order
