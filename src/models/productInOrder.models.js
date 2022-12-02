@@ -8,6 +8,9 @@ const { DataTypes } = require("sequelize");
  *     request_order:
  *       type: object
  *       properties:
+ *         totalPrice: 
+ *           type: number
+ *           example: 4000
  *         quantity:
  *           type: number
  *           example: 6
@@ -26,6 +29,9 @@ const { DataTypes } = require("sequelize");
  *     create_order:
  *       type: object
  *       properties:
+ *         totalPrice: 
+ *           type: number
+ *           example: 4000
  *         quantity:
  *           type: number
  *           example: 6
