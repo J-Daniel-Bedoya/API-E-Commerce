@@ -14,7 +14,7 @@ const bcrypt = require("bcrypt");
  *           example: Jose Daniel
  *         email:
  *           type: string
- *           example: josedaniel@gmail.com
+ *           example: josedaniel37@gmail.com
  *     register:
  *       type: object
  *       properties:
