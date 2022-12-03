@@ -13,20 +13,25 @@ class OrdersServices {
           status: cart.status,
           userId: id,
       });
+      const quantityArr = [];
+      allProducts.forEach((prod) => {
+          quantityArr.push(prod.quantity);
+      })
+      const quantity = quantityArr.reduce((a, b) => a + b);
 
       allProducts.forEach( async(prod) => {
-          const product = await Products.findOne({where: prod.productId});
-          const orderProducts =  ProductsInOrder.create({
-            quantity: prod.quantity,
-            price: prod.price,
-            status: prod.status,
-            orderId: order.id,
-            productId: prod.productId,
-          });
+        const product = await Products.findOne({where: prod.productId});
+        const orderProducts =  ProductsInOrder.create({
+          quantity: prod.quantity,
+          price: prod.price,
+          status: prod.status,
+          orderId: order.id,
+          productId: prod.productId,
+        });
+        
+        product.update({availableQty: product.availableQty - prod.quantity});
+      });
 
-          prod.destroy()
-          product.update({availableQty: product.availableQty - prod.quantity});
-      })
       cart.update({
           status: true,
           totalPrice: 0,
@@ -38,9 +43,13 @@ class OrdersServices {
         from: "<jbedoyachavarriaga@gmail.com>",
         to: user.email,
         subject: `Gracias por preferir a My shop`,
-        text: `Haz realizado la compra de ${cart.totalPrice} productos por un total de ${order.totalPrice}`,
-        html: orderTemplate(user.username, cart.totalPrice, order.totalPrice),
+        text: `Haz realizado la compra de ${quantity} productos por un total de ${order.totalPrice}`,
+        html: orderTemplate(user.username, quantity, order.totalPrice),
       }); 
+
+      const emptyCart = allProducts.map((prod) => {
+        return prod.destroy();
+      })
       return order;
     } catch (error) {
       throw error;

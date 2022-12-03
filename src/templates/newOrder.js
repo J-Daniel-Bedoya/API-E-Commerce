@@ -92,7 +92,7 @@ const orderTemplate = (username, cartTotalPrice, orderTotalPrice) => `
                         <td>
                           <p
                             style="font-weight:400;font-size: 16px;line-height: 150%;letter-spacing: 0.2px;color: #333333;">
-                            Haz realizado la compra de ${cartTotalPrice} productos por un total de ${orderTotalPrice}
+                            Haz realizado la compra de ${cartTotalPrice} productos por un total de $${orderTotalPrice}USD.
                             Te invitamos a que nos recomiendes con tus amigos y familia.
                           </p>
                         </td>

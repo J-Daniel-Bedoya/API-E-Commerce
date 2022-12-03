@@ -9,7 +9,7 @@ const seeCart = async (req, res, next) => {
     next({
       status: 400,
       errorContent: error,
-      message: "Algo salio mal",
+      message: "Algo salio mal, o no hay productos que mostrar. Agrega nuevos productos al carrito",
     });
   }
 }
