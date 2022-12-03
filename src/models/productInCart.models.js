@@ -21,7 +21,7 @@ const { DataTypes } = require("sequelize");
  *           type: number
  *           example: 1
  *         productId:
- *           type: string
+ *           type: number
  *           example: 1
  *     add_cart:
  *       type: object
@@ -29,17 +29,11 @@ const { DataTypes } = require("sequelize");
  *         quantity:
  *           type: number
  *           example: 3
- *         price:
- *           type: number
- *           example: 12000
  *         status:
  *           type: boolean
  *           example: true
- *         cartId:
- *           type: number
- *           example: 1
  *         productId:
- *           type: string
+ *           type: number
  *           example: 1
  *     securitySchemes:
  *       bearerAuth:

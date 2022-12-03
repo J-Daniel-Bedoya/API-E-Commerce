@@ -1,29 +1,47 @@
-const { Users, Orders, ProductsInOrder } = require("../models");
-const transporter = require("../utils/mailter");
+const { Users, Orders, ProductsInOrder, Cart, ProductInCart, Products } = require("../models");
+const transporter = require("../utils/mailter"); 
+const orderTemplate = require("../templates/newOrder");
 
 class OrdersServices {
 
   static async postOrder(id, body) {
     try {
-      const createOrder = await Orders.create({
-        totalPrice: body.totalPrice,
-        status: body.status,
-        userId: id,
-        user_id: id,
-      })
+      const allProducts = await ProductInCart.findAll();
+      const cart = await Cart.findOne({where:{ id }});
+      const order = await Orders.create({
+          totalPrice: cart.totalPrice,
+          status: cart.status,
+          userId: id,
+      });
 
-      const result = await ProductsInOrder.create({...body, orderId: createOrder.id});
-      const enviarEmail = await Users.findAll()
-      
-      console.log(enviarEmail[0])
+      allProducts.forEach( async(prod) => {
+          const product = await Products.findOne({where: prod.productId});
+          const orderProducts =  ProductsInOrder.create({
+            quantity: prod.quantity,
+            price: prod.price,
+            status: prod.status,
+            orderId: order.id,
+            productId: prod.productId,
+          });
+
+          prod.destroy()
+          product.update({availableQty: product.availableQty - prod.quantity});
+      })
+      cart.update({
+          status: true,
+          totalPrice: 0,
+      });
+
+      const user = await Users.findOne({where: {id}});
+      // console.log(user.email)
       transporter.sendMail({
         from: "<jbedoyachavarriaga@gmail.com>",
-        to: enviarEmail,
+        to: user.email,
         subject: `Gracias por preferir a My shop`,
-        text: `Haz realizado la compra de ${body.quantity} productos por un total de ${body.totalPrice}`,
-        // html: welcomeTemplate(result.firstname, result.lastname),
+        text: `Haz realizado la compra de ${cart.totalPrice} productos por un total de ${order.totalPrice}`,
+        html: orderTemplate(user.username, cart.totalPrice, order.totalPrice),
       }); 
-      return result;
+      return order;
     } catch (error) {
       throw error;
     }
@@ -34,12 +52,20 @@ class OrdersServices {
         where: { id },
         attributes: ["username"],
         include: {
-          model: Orders,
-          as: "orders",
-          attributes: {
-            exclude: ["userId", "user_id"]
-          }
+            model: Orders,
+            as: "purchased",
+            attributes: {
+              exclude: ["userId", "user_id"]
+            },
+            include: {
+              model: ProductsInOrder,
+              as: "orders",
+              attributes: {
+                exclude: ["orderId", "order_id", "productId", "product_id"]
+              }
+            }
         }
+
       });
  
       return result;
@@ -50,3 +76,4 @@ class OrdersServices {
 }
 
 module.exports = OrdersServices;
+

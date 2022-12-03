@@ -1,5 +1,6 @@
 const { UserServices } = require("../services");
 const transporter = require("../utils/mailter");
+const welcomeTemplate = require("../templates/welcome");
 
 const userRegister = async (req, res, next) => {
   try {
@@ -12,7 +13,7 @@ const userRegister = async (req, res, next) => {
       to: result.email,
       subject: "Bienvenido My shop",
       text: `Hola ${result.username} bienvenido a la mejor tienda de productos online`,
-      // html: welcomeTemplate(result.firstname, result.lastname),
+      html: welcomeTemplate(result.username),
     });
   } catch (error) {
     next({

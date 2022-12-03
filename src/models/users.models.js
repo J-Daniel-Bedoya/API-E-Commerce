@@ -9,6 +9,9 @@ const bcrypt = require("bcrypt");
  *     users:
  *       type: object
  *       properties:
+ *         id:
+ *           type: number
+ *           example: 1
  *         username:
  *           type: string
  *           example: Jose Daniel
@@ -39,6 +42,9 @@ const bcrypt = require("bcrypt");
  *     request_auth:
  *       type: object
  *       properties:
+ *         id:
+ *           type: number
+ *           example: 1
  *         username:
  *           type: string
  *           example: Jose Daniel

@@ -13,7 +13,7 @@ const userLogin = async (req, res, next) => {
       const user = { firstname, lastname, email, id, phone };
       const token = AuthServices.genToken(user);
       user.token = token;
-      res.json({ ...user });
+      res.status(201).json({ ...user });
     } else {
       res.status(400).json({ message: "Información inválida" });
     }

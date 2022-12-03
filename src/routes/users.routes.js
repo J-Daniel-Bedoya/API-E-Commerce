@@ -5,7 +5,7 @@ const { userRegister, getUser } = require("../controllers");
 
 /**
  * @openapi
- * /api/v1/users/register:
+ * /api/v1/users:
  *   post:
  *     summary: Register a new user into the app
  *     tags: [Users]
@@ -62,7 +62,7 @@ const { userRegister, getUser } = require("../controllers");
  *                     $ref: "#/components/schemas/users"
  */
 
-router.post("/users/register", userRegister);
+router.post("/users", userRegister);
 router.get("/users/:id", authenticate, getUser);
 
 module.exports = router;

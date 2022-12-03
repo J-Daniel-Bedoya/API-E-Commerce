@@ -1,17 +1,35 @@
 const { ProductsServices } = require("../services");
 
+const getProductsAll = async (req, res, next) => {
+  try {
+    const allProducts = await ProductsServices.getProdAll();
+    const productsAvailable = [];
+    allProducts.forEach((e) => {
+      if( e.availableQty > 0) {
+          productsAvailable.push(e);
+      }
+    })
+    console.log(productsAvailable)
+    res.json(productsAvailable);
+  } catch (error) {
+    next({
+        message: 'no se pudo obtener los productos',
+        status:400,
+        errorContent: error
+    })
+  }
+}
 const getProducts = async (req, res, next) => {
   try {
-    const offset = req.query.offset ?? 0;
-    const limit = req.query.limit ?? 5;
-    const allProducts = await ProductsServices.getProd(offset, limit);
+    const { id }  = req.params;
+    const products = await ProductsServices.getProd(id);
     const productsAvailable = [];
-    allProducts.forEach(e=>{
-        if(e.availableQty !== 0){
-            productsAvailable.push(e)
-        }
+    products.products.forEach((e) => {
+      if( e.availableQty > 0) {
+          productsAvailable.push(e);
+      }
     })
-    res.json(productsAvailable);
+    res.json({username: products.username, products: productsAvailable});
   } catch (error) {
     next({
         message: 'no se pudo obtener los productos',
@@ -22,8 +40,9 @@ const getProducts = async (req, res, next) => {
 }
 const createProducts = async (req, res, next) => {
   try {
+    const { id } = req.params;
     const body = req.body;
-    const result = await ProductsServices.createProd(body);
+    const result = await ProductsServices.createProd(id, body);
     res.status(201).json(result);
   } catch (error) {
     next({
@@ -35,6 +54,7 @@ const createProducts = async (req, res, next) => {
 };
 
 module.exports = {
+  getProductsAll,
   getProducts,
-  createProducts
+  createProducts,
 };

@@ -15,8 +15,9 @@ const seeCart = async (req, res, next) => {
 }
 const addProducts = async (req, res, next) => {
   try {
+    const { id } = req.params;
     const body = req.body;
-    const result = await CartServices.addCart(body);
+    const result = await CartServices.addCart(id, body);
     res.status(201).json(result);
   } catch (error) {
     next({

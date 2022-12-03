@@ -8,6 +8,9 @@ const { DataTypes } = require("sequelize");
  *     request_order:
  *       type: object
  *       properties:
+ *         username: 
+ *           type: string
+ *           example: Jose Daniel
  *         totalPrice: 
  *           type: number
  *           example: 4000
@@ -23,24 +26,6 @@ const { DataTypes } = require("sequelize");
  *         orderId:
  *           type: number
  *           example: 1
- *         productId:
- *           type: string
- *           example: 1
- *     create_order:
- *       type: object
- *       properties:
- *         totalPrice: 
- *           type: number
- *           example: 4000
- *         quantity:
- *           type: number
- *           example: 6
- *         price:
- *           type: number
- *           example: 23000
- *         status:
- *           type: boolean
- *           example: true
  *         productId:
  *           type: string
  *           example: 1
@@ -62,11 +47,11 @@ const ProductsInOrder = db.define(
     },
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     price: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     status: {
       type: DataTypes.BOOLEAN,
@@ -75,12 +60,12 @@ const ProductsInOrder = db.define(
     },
     orderId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       field: "order_id",
     },
     productId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       field: "product_id",
     },
   }, {

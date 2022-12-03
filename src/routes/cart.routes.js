@@ -5,8 +5,10 @@ const { addProducts, seeCart } = require("../controllers");
 
 /**
  * @openapi
- * /api/v1/cart/addProduct:
+ * /api/v1/users/{id}/cart:
  *   post:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Add a product to the cart
  *     tags: [Cart]
  *     requestBody:
@@ -16,6 +18,14 @@ const { addProducts, seeCart } = require("../controllers");
  *         application/json:
  *           schema:
  *             $ref: "#/components/schemas/add_cart"
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: user Id
  *     responses:
  *       201:
  *         description: add product
@@ -31,7 +41,6 @@ const { addProducts, seeCart } = require("../controllers");
  *                   type: array
  *                   items:
  *                     $ref: "#/components/schemas/request_cart"
- * /api/v1/users/{id}/cart:
  *   get:
  *     security:
  *       - bearerAuth: []
@@ -63,7 +72,7 @@ const { addProducts, seeCart } = require("../controllers");
  */
 
 
-router.post("/cart/addProduct", addProducts)
+router.post("/users/:id/cart", authenticate, addProducts)
 
 router.get("/users/:id/cart", authenticate, seeCart)
 

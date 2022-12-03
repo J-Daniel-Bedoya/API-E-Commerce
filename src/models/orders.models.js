@@ -35,7 +35,7 @@ const Orders = db.define(
     },
     totalPrice: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       field: "total_price",
     },
     status: {
@@ -45,7 +45,7 @@ const Orders = db.define(
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       field: "user_id",
     },
   }

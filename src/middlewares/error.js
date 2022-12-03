@@ -3,7 +3,7 @@ const handleError = (error, req, res, next) => {
   console.log("capturando el error");
   res.status(status).json({
     message,
-    error: errorContent.message,
+    error: errorContent?.message,
   });
 };
 

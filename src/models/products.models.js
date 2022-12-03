@@ -44,9 +44,6 @@ const { DataTypes } = require("sequelize");
  *         status:
  *           type: boolean
  *           example: true
- *         userId:
- *           type: number
- *           example: 1
  *     securitySchemes:
  *       bearerAuth:
  *         type: http

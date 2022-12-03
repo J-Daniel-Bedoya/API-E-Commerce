@@ -5,17 +5,12 @@ const { createOrder, getOrder } = require("../controllers");
 
 /**
  * @openapi
- * /api/v1/users/{id}/orders/create:
+ * /api/v1/users/{id}/orders:
  *   post:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Create a order in the app
  *     tags: [Order]
- *     requestBody:
- *       description: Create a new order in the app
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: "#/components/schemas/create_order"
  *     parameters:
  *       - in: path
  *         name: id
@@ -39,7 +34,6 @@ const { createOrder, getOrder } = require("../controllers");
  *                   type: array
  *                   items:
  *                     $ref: "#/components/schemas/request_order"
- * /api/v1/users/{id}/orders:
  *   get:
  *     security:
  *       - bearerAuth: []
@@ -70,7 +64,7 @@ const { createOrder, getOrder } = require("../controllers");
  *                     $ref: "#/components/schemas/request_order"
  */
 
-router.post("/users/:id/orders/create", createOrder)
+router.post("/users/:id/orders", authenticate, createOrder)
 
 router.get("/users/:id/orders", authenticate, getOrder);
 

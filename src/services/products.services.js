@@ -2,7 +2,7 @@ const { Users, Products } = require("../models");
 
 class ProductsServices {
 
-  static async getProd(offset, limit) {
+  static async getProdAll() {
     try {
         const result = await Products.findAll({
           attributes: {
@@ -12,18 +12,34 @@ class ProductsServices {
             model: Users,
             as: "user",
             attributes: ["username"]
-          },
-          offset,
-          limit,
+          }
         });
         return result;
     } catch (error) {
         throw(error); 
     }
   }
-  static async createProd(body) {
+  static async getProd(id) {
     try {
-      const result = await Products.create(body);
+        const result = await Users.findOne({
+          where: { id },
+          attributes: ["username"],
+          include: {
+            model: Products,
+            as: "products",
+            attributes: {
+              exclude: ["userId", "user_id"]
+            }
+          }
+        });
+        return result;
+    } catch (error) {
+        throw(error); 
+    }
+  }
+  static async createProd(id, body) {
+    try {
+      const result = await Products.create({...body, userId: id});
       return result;
     } catch (error) {
       throw error;
