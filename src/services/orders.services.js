@@ -47,8 +47,8 @@ class OrdersServices {
         html: orderTemplate(user.username, quantity, order.totalPrice),
       }); 
 
-      const emptyCart = allProducts.map(async (prod) => {
-        return await prod.destroy();
+      allProducts.forEach( async(prod) => {
+        await prod.destroy({ force: true });
       })
       return order;
     } catch (error) {
