@@ -3,11 +3,6 @@ const { Cart, ProductInCart, Products } = require("../models");
 class CartServices {
 
   static async readCart(id) {
-    const totalPriceCartArray = await ProductInCart.findAll();
-    const totalPriceCart = totalPriceCartArray.map(e => { return e.price});
-    const priceTotal = totalPriceCart.reduce((a, b) => a + b);
-    const cart = await Cart.findOne({where: {id}})
-    const res = await cart.update({totalPrice: priceTotal})
 
     try {
       const result = await Cart.findOne({
@@ -28,12 +23,19 @@ class CartServices {
       throw error;
     }
   }
-  static async addCart(ids, product) {
+  static async addCart(id, product) {
     try {
-      const id = product.productId;
-      const priceProduct =  await Products.findOne({ where: {id}});
+
+      const idProduct = product.productId;
+      const priceProduct =  await Products.findOne({ where: {id:idProduct}});
       const priceTotalProduct = product.quantity * priceProduct.price;
-      const result = await ProductInCart.create({...product, price: priceTotalProduct, cartId: ids});
+      const result = await ProductInCart.create({...product, price: priceTotalProduct, cartId: id});
+      const totalPriceCartArray = await ProductInCart.findAll();
+
+      const totalPriceCart = totalPriceCartArray.map(e => { return e.price});
+      const priceTotal = totalPriceCart.reduce((a, b) => a + b);
+      const cart = await Cart.findOne({where: {id}})
+      const res = await cart.update({totalPrice: priceTotal})
       return result;
     } catch (error) {
       throw error;

@@ -48,7 +48,7 @@ class OrdersServices {
       }); 
 
       allProducts.forEach( async(prod) => {
-        await prod.destroy({ force: true });
+        await prod.destroy();
       })
       return order;
     } catch (error) {
