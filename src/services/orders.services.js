@@ -38,7 +38,7 @@ class OrdersServices {
       });
 
       const user = await Users.findOne({where: {id}});
-      // console.log(user.email)
+
       transporter.sendMail({
         from: "<jbedoyachavarriaga@gmail.com>",
         to: user.email,
@@ -47,8 +47,8 @@ class OrdersServices {
         html: orderTemplate(user.username, quantity, order.totalPrice),
       }); 
 
-      const emptyCart = allProducts.map((prod) => {
-        return prod.destroy();
+      const emptyCart = allProducts.map(async (prod) => {
+        return await prod.destroy();
       })
       return order;
     } catch (error) {
