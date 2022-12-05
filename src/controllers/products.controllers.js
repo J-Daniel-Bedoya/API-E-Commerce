@@ -9,7 +9,7 @@ const getProductsAll = async (req, res, next) => {
           productsAvailable.push(e);
       }
     })
-    console.log(productsAvailable)
+
     res.json(productsAvailable);
   } catch (error) {
     next({
@@ -29,7 +29,7 @@ const getProducts = async (req, res, next) => {
           productsAvailable.push(e);
       }
     })
-    res.json({username: products.username, products: productsAvailable});
+    res.json({products: productsAvailable});
   } catch (error) {
     next({
         message: 'no se pudo obtener los productos',

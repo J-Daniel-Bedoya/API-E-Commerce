@@ -23,6 +23,9 @@ const { DataTypes } = require("sequelize");
  *         status:
  *           type: boolean
  *           example: true
+ *         categoryId:
+ *           type: number
+ *           example: 1
  *         userId:
  *           type: number
  *           example: 1
@@ -44,6 +47,9 @@ const { DataTypes } = require("sequelize");
  *         status:
  *           type: boolean
  *           example: true
+ *         categoryId:
+ *           type: number
+ *           example: 1
  *     securitySchemes:
  *       bearerAuth:
  *         type: http
@@ -81,6 +87,11 @@ const Products = db.define(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
+    },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: "category_id",
     },
     userId: {
       type: DataTypes.INTEGER,

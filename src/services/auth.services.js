@@ -34,6 +34,23 @@ class AuthServices {
       throw error;
     }
   }
+  static async logout(credentials) {
+    try {
+      const { email, password } = credentials;
+      const user = await Users.findOne({
+        where: { email }
+      })
+      // console.log(user)
+      if (user) {
+        const isValid = bcrypt.compareSync(password, user.password);
+        return isValid ? { remove: await user.destroy(), message: "usuario eliminado correctamente" } : { message: "Contraseña incorrecta" };
+      } else {
+        return { message: "Email incorrecto" };
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = AuthServices;

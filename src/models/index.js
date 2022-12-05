@@ -4,6 +4,7 @@ const Orders = require("./orders.models");
 const Cart = require("./cart.models");
 const ProductsInOrder = require("./productInOrder.models");
 const ProductInCart = require("./productInCart.models");
+const Categories  =require("./categories.models");
 
 module.exports = {
   Users,
@@ -12,4 +13,5 @@ module.exports = {
   Cart,
   ProductsInOrder,
   ProductInCart,
+  Categories,
 }

@@ -1,4 +1,4 @@
-const { Users, Products } = require("../models");
+const { Users, Products, Categories  } = require("../models");
 
 class ProductsServices {
 
@@ -6,13 +6,20 @@ class ProductsServices {
     try {
         const result = await Products.findAll({
           attributes: {
-            exclude: ["userId", "user_id"]
+            exclude: ["userId", "user_id", "categoryId", "category_id"]
           },
-          include:{
-            model: Users,
-            as: "user",
-            attributes: ["username"]
-          }
+          include: [
+            {
+              model: Users,
+              as: "user",
+              attributes: ["username"]
+            },
+            {
+              model: Categories,
+              as: "category",
+              attributes: ["name_category"]
+            }
+          ]
         });
         return result;
     } catch (error) {
@@ -24,14 +31,22 @@ class ProductsServices {
         const result = await Users.findOne({
           where: { id },
           attributes: ["username"],
-          include: {
-            model: Products,
-            as: "products",
-            attributes: {
-              exclude: ["userId", "user_id"]
-            }
-          }
+          include: [
+            {
+              model: Products,
+              as: "products",
+              attributes: {
+                exclude: ["userId", "user_id", "categoryId", "category_id"]
+              },
+              include: {
+                model: Categories,
+                as: "category",
+                attributes: ["name_category"]
+              }
+            },
+          ]
         });
+        // console.log(result.products)
         return result;
     } catch (error) {
         throw(error); 

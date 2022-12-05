@@ -2,15 +2,13 @@ const { AuthServices } = require("../services");
 
 const userLogin = async (req, res, next) => {
   try {
-    // email y password
+    
     const credentials = req.body;
     const result = await AuthServices.authenticate(credentials);
-    // false --> no era contraseña invalida
-    // null --> no se encuentra al usuario
-    // { isValid, result }
+
     if (result) {
-      const { firstname, lastname, email, id, phone } = result.result;
-      const user = { firstname, lastname, email, id, phone };
+      const { email, password } = result.result;
+      const user = { email, password };
       const token = AuthServices.genToken(user);
       user.token = token;
       res.status(201).json({ ...user });
@@ -25,7 +23,22 @@ const userLogin = async (req, res, next) => {
     });
   }
 };
+const deleteLogout = async (req, res, next) => {
+  try {
+    const credentials = req.body;
+    const result = await AuthServices.logout(credentials);
+    res.json(result)
+  } catch (error) {
+    next({
+      status: 400,
+      errorContent: error,
+      message: "Email o contraseña inválida",
+    });
+  }
+};
 
 module.exports = {
   userLogin,
+  deleteLogout,
 };
+
