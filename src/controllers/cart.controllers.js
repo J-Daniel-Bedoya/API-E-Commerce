@@ -29,10 +29,10 @@ const addProducts = async (req, res, next) => {
 }
 const updateCart = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const body = req.body;
-    const result = await CartServices.upCart(id, body);
-    res.status(201).json(result);
+    const { cartId, productId } = req.params;
+    const quatity = req.body;
+    const result = await CartServices.upCart(cartId, productId, quatity);
+    res.json(result);
   } catch (error) {
     next({
       status: 400,
@@ -43,10 +43,9 @@ const updateCart = async (req, res, next) => {
 }
 const deleteCart = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const body = req.body;
-    const result = await CartServices.delCart(id, body);
-    res.status(201).json(result);
+    const { cartId, productId } = req.params;
+    const result = await CartServices.delCart(cartId, productId);
+    res.json({message: "Producto eliminado del carrito con exito"});
   } catch (error) {
     next({
       status: 400,

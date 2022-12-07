@@ -14,7 +14,7 @@ class CartServices {
           model: ProductInCart,
           as: "products",
           attributes: {
-            exclude: ["cartId", "cart_id", "productId", "product_id"]
+            exclude: ["cartId", "cart_id", "product_id"]
           }
         },
       });
@@ -28,11 +28,11 @@ class CartServices {
 
       const idProduct = product.productId;
       const priceProduct =  await Products.findOne({ where: {id:idProduct}});
-      const priceTotalProduct = product.quantity * priceProduct.price;
-      const result = await ProductInCart.create({...product, price: priceTotalProduct, cartId: id});
-      const totalPriceCartArray = await ProductInCart.findAll();
+      const priceTotalProduct = product.quantity * priceProduct?.price;
+      const result = await ProductInCart.create({...product, price: priceTotalProduct, cartId: id, productId: idProduct});
 
-      const totalPriceCart = totalPriceCartArray.map(e => { return e.price});
+      const totalPriceCartArray = await ProductInCart.findAll();
+      const totalPriceCart = totalPriceCartArray.map(total => { return total.price});
       const priceTotal = totalPriceCart.reduce((a, b) => a + b);
       const cart = await Cart.findOne({where: {id}})
       const res = await cart.update({totalPrice: priceTotal})
@@ -41,20 +41,50 @@ class CartServices {
       throw error;
     }
   } 
-  static async upCart(id, product) {
+  static async upCart(idCart, idProduct, quantity) {
     try {
+      const prod = await ProductInCart.findAll({ where: { cartId: idCart } })
+      prod.map( async(pro) => {
+        let price = 0;
+        if (Number(idProduct) === pro.dataValues.productId){
+          await pro.update(quantity)
+        }
+      })
+      prod.map( async(pro) => {
+        if (Number(idProduct) === pro.dataValues.productId){
+          const priceProduct =  await Products.findOne({ where: {id:idProduct}});
+          const price = pro.quantity * priceProduct.price;
+          await pro.update({price: price});
+        }
+      })
 
-      
-      return result;
+      const totalPriceCartArray = await ProductInCart.findAll();
+      const totalPriceCart = totalPriceCartArray.map(total => { return total.price});
+      const priceTotal = totalPriceCart.reduce((a, b) => a + b);
+      const cart = await Cart.findOne({where: {id: idCart}});
+      await cart.update({totalPrice: priceTotal});
+
+      return prod;
     } catch (error) {
       throw error;
     }
   }
-  static async delCart(id, product) {
+  static async delCart(idCart, idProduct) {
     try {
+      const prod = await ProductInCart.findAll({ where: { cartId: idCart } })
+      prod.map(pro => {
+        if (Number(idProduct) === pro.dataValues.productId){
+          pro.destroy()
+        }
+      })
+      
+      const totalPriceCartArray = await ProductInCart.findAll();
+      const totalPriceCart = totalPriceCartArray.map(total => { return total.price});
+      const priceTotal = totalPriceCart.reduce((a, b) => a + b);
+      const cart = await Cart.findOne({where: {id: idCart}});
+      await cart.update({totalPrice: priceTotal});
 
-
-      return result;
+      return prod;
     } catch (error) {
       throw error;
     }

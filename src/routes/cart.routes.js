@@ -69,20 +69,34 @@ const { addProducts, seeCart, updateCart, deleteCart } = require("../controllers
  *                   type: array
  *                   items:
  *                     $ref: "#/components/schemas/request_cart"
- * /api/v1/cart/{id}:
+ * /api/v1/cart/{cartId}/product/{productId}:
  *   patch:
  *     security:
  *       - bearerAuth: []
- *     summary: See the data of a cart in the app
+ *     summary: Update a product
  *     tags: [Cart]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: cartId
  *         required: true
  *         schema:
  *           type: integer
  *           minimum: 1
  *         description: cart Id
+ *       - in: path
+ *         name: productId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: product Id
+ *     requestBody:
+ *       description: Add a new product to the shopping cart
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/update_cart"
  *     responses:
  *       200:
  *         description: Data displayed successfully
@@ -101,16 +115,23 @@ const { addProducts, seeCart, updateCart, deleteCart } = require("../controllers
  *   delete:
  *     security:
  *       - bearerAuth: []
- *     summary: See the data of a cart in the app
+ *     summary: Delete a product
  *     tags: [Cart]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: cartId
  *         required: true
  *         schema:
  *           type: integer
  *           minimum: 1
  *         description: cart Id
+ *       - in: path
+ *         name: productId
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: product Id
  *     responses:
  *       200:
  *         description: Data displayed successfully
@@ -133,8 +154,8 @@ router.post("/users/:id/cart", authenticate, addProducts);
 
 router.get("/users/:id/cart", authenticate, seeCart);
 
-router.patch("/cart/:id", authenticate, updateCart);
+router.patch("/cart/:cartId/product/:productId", updateCart);
 
-router.delete("/cart/:id", authenticate, deleteCart);
+router.delete("/cart/:cartId/product/:productId", deleteCart);
 
 module.exports = router;

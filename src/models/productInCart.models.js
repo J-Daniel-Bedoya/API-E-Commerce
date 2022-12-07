@@ -35,6 +35,12 @@ const { DataTypes } = require("sequelize");
  *         productId:
  *           type: number
  *           example: 1
+ *     update_cart:
+ *       type: object
+ *       properties:
+ *         quantity:
+ *           type: number
+ *           example: 3
  *     securitySchemes:
  *       bearerAuth:
  *         type: http
