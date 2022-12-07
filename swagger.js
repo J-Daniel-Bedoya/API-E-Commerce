@@ -22,9 +22,10 @@ const options = {
     "./src/models/categories.models.js",
 
     "./src/routes/products.routes.js",
-    "./src/models/products.models.js"
-    ,
+    "./src/models/products.models.js",
+    
     "./src/routes/cart.routes.js",
+    "./src/models/cart.models.js",
     "./src/models/productInCart.models.js",
 
     "./src/routes/orders.routes.js",

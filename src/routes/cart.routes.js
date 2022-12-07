@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const authenticate = require("../middlewares/auth.middleware");
-const { addProducts, seeCart } = require("../controllers");
+const { addProducts, seeCart, updateCart, deleteCart } = require("../controllers");
 
 /**
  * @openapi
  * /api/v1/users/{id}/cart:
  *   post:
- *     security:
+ *     security: 
  *       - bearerAuth: []
  *     summary: Add a product to the cart
  *     tags: [Cart]
@@ -69,11 +69,72 @@ const { addProducts, seeCart } = require("../controllers");
  *                   type: array
  *                   items:
  *                     $ref: "#/components/schemas/request_cart"
+ * /api/v1/cart/{id}:
+ *   patch:
+ *     security:
+ *       - bearerAuth: []
+ *     summary: See the data of a cart in the app
+ *     tags: [Cart]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: cart Id
+ *     responses:
+ *       200:
+ *         description: Data displayed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: "#/components/schemas/request_cart"
+ *   delete:
+ *     security:
+ *       - bearerAuth: []
+ *     summary: See the data of a cart in the app
+ *     tags: [Cart]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: cart Id
+ *     responses:
+ *       200:
+ *         description: Data displayed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: "#/components/schemas/request_cart_products"
  */
 
 
-router.post("/users/:id/cart", authenticate, addProducts)
+router.post("/users/:id/cart", authenticate, addProducts);
 
-router.get("/users/:id/cart", authenticate, seeCart)
+router.get("/users/:id/cart", authenticate, seeCart);
+
+router.patch("/cart/:id", authenticate, updateCart);
+
+router.delete("/cart/:id", authenticate, deleteCart);
 
 module.exports = router;

@@ -27,9 +27,39 @@ const addProducts = async (req, res, next) => {
     });
   }
 }
+const updateCart = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const result = await CartServices.upCart(id, body);
+    res.status(201).json(result);
+  } catch (error) {
+    next({
+      status: 400,
+      errorContent: error,
+      message: "Algo salio mal",
+    }); 
+  }
+}
+const deleteCart = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const result = await CartServices.delCart(id, body);
+    res.status(201).json(result);
+  } catch (error) {
+    next({
+      status: 400,
+      errorContent: error,
+      message: "Algo salio mal",
+    });
+  }
+}
 
 
 module.exports = {
   addProducts,
   seeCart,
+  updateCart,
+  deleteCart,
 };

@@ -55,5 +55,3 @@ class AuthServices {
 
 module.exports = AuthServices;
 
-// email --> tengo que obtener al usuario de la base de datos
-//

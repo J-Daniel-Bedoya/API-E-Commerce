@@ -17,6 +17,12 @@ const { DataTypes } = require("sequelize");
  *         userId:
  *           type: number
  *           example: 3
+ *     request_cart_products:
+ *       type: object
+ *       properties:
+ *         message: 
+ *           type: string
+ *           example: Producto eliminado del carrito con exito
  *     securitySchemes:
  *       bearerAuth:
  *         type: http

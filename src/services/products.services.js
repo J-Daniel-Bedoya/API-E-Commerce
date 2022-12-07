@@ -60,6 +60,24 @@ class ProductsServices {
       throw error;
     }
   }
+  static async updateProd(id, body) {
+    try {
+      const products = await Products.findOne({where: { id }});
+      const result = await products.update({...body});
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async deleteProd(id) {
+    try {
+      const products = await Products.findOne({where: { id }});
+      const result = await products.destroy();
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = ProductsServices;

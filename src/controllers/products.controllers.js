@@ -51,10 +51,39 @@ const createProducts = async (req, res, next) => {
       message: "Algo salio mal",
     });
   }
+}
+const updateProducts = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const result = await ProductsServices.updateProd(id, body);
+    res.json(result);
+  } catch (error) {
+    next({
+      status: 400,
+      errorContent: error,
+      message: "Algo salio mal, NO exite token",
+    });
+  }
+}
+const deleteProducts = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await ProductsServices.deleteProd(id);
+    res.json({message: "Producto eliminado correctamente"});
+  } catch (error) {
+    next({
+      status: 400,
+      errorContent: error,
+      message: "Algo salio mal",
+    });
+  }
 };
 
 module.exports = {
   getProductsAll,
   getProducts,
   createProducts,
+  updateProducts,
+  deleteProducts,
 };

@@ -40,6 +40,24 @@ class CartServices {
     } catch (error) {
       throw error;
     }
+  } 
+  static async upCart(id, product) {
+    try {
+
+      
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async delCart(id, product) {
+    try {
+
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
 }

@@ -50,6 +50,27 @@ const { DataTypes } = require("sequelize");
  *         categoryId:
  *           type: number
  *           example: 1
+ *     update_product:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: Alpinito
+ *         price:
+ *           type: number
+ *           example: 4000
+ *         image:
+ *           type: string
+ *           example: https://bit.ly/3Y1d0I7
+ *         availableQty:
+ *           type: number
+ *           example: 5
+ *     request_product_delete:
+ *       type: object
+ *       properties:
+ *         message: 
+ *           type: string
+ *           example: Producto eliminado correctamente
  *     securitySchemes:
  *       bearerAuth:
  *         type: http
