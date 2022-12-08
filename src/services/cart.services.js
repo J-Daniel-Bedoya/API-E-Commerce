@@ -77,7 +77,7 @@ class CartServices {
     try {
       const prod = await ProductInCart.findAll({ where: { cartId: idCart } })
       prod.map( async(pro) => {
-        if (Number(idProduct) === pro.dataValues.productId){
+        if (Number(idProduct) === pro.dataValues.id){
           pro.destroy()
         }
         const totalPriceCartArray = await ProductInCart.findAll();
