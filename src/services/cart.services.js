@@ -15,6 +15,11 @@ class CartServices {
           as: "products",
           attributes: {
             exclude: ["cartId", "cart_id", "product_id"]
+          },
+          include: {
+            model: Products,
+            as: "product",
+            attributes: ["name", "price", "image"]
           }
         },
       });

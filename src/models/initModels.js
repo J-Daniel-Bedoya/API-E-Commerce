@@ -36,7 +36,7 @@ const initModels = () => {
   Cart.hasMany(ProductInCart, { as: "products", foreignKey: "cart_id" })
 
   ProductInCart.belongsTo(Products, { foreignKey: "product_id" })
-  Products.hasMany(ProductInCart, { foreignKey: "product_id" })
+  Products.hasMany(ProductInCart, {  as: "product", foreignKey: "product_id" })
 
 };
 
