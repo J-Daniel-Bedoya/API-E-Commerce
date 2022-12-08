@@ -53,8 +53,6 @@ class CartServices {
         if (Number(idProduct) === pro.dataValues.productId){
           await pro.update(quantity)
         }
-      })
-      prod.map( async(pro) => {
         if (Number(idProduct) === pro.dataValues.productId){
           const priceProduct =  await Products.findOne({ where: {id:idProduct}});
           const price = pro.quantity * priceProduct.price;
@@ -69,7 +67,6 @@ class CartServices {
           await cart.update({totalPrice: priceTotal});
         });
       })
-
 
       return prod;
     } catch (error) {
