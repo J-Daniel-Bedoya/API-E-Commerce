@@ -72,7 +72,7 @@ class CartServices {
     } catch (error) {
       throw error;
     }
-  }
+  } 
   static async delCart(idCart, idProduct) {
     try {
       const prod = await ProductInCart.findAll({ where: { cartId: idCart } })
