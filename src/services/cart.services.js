@@ -83,13 +83,13 @@ class CartServices {
         if (Number(idProduct) === pro.dataValues.productId){
           pro.destroy()
         }
+        const totalPriceCartArray = await ProductInCart.findAll();
+        const totalPriceCart = totalPriceCartArray.map(total => { return total.price});
+        const priceTotal = totalPriceCart.reduce((a, b) => a + b);
+        const cart = await Cart.findOne({where: {id: idCart}});
+        await cart.update({totalPrice: priceTotal});
       })
       
-      const totalPriceCartArray = await ProductInCart.findAll();
-      const totalPriceCart = totalPriceCartArray.map(total => { return total.price});
-      const priceTotal = totalPriceCart.reduce((a, b) => a + b);
-      const cart = await Cart.findOne({where: {id: idCart}});
-      await cart.update({totalPrice: priceTotal});
 
       return prod;
     } catch (error) {
