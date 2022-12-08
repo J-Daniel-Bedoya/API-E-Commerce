@@ -14,7 +14,7 @@ class CartServices {
           model: ProductInCart,
           as: "products",
           attributes: {
-            exclude: ["cartId", "cart_id", "product_id"]
+            exclude: ["cartId", "cart_id", "productId", "product_id"]
           },
           include: {
             model: Products,
@@ -50,7 +50,6 @@ class CartServices {
     try {
       const prod = await ProductInCart.findAll({ where: { cartId: idCart } })
       prod.map( async(pro) => {
-        let price = 0;
         if (Number(idProduct) === pro.dataValues.productId){
           await pro.update(quantity)
         }
@@ -64,7 +63,10 @@ class CartServices {
       })
 
       const totalPriceCartArray = await ProductInCart.findAll();
-      const totalPriceCart = totalPriceCartArray.map(total => { return total.price});
+      const totalPriceCart = [];
+      totalPriceCartArray.forEach(total => { 
+        totalPriceCart.push(total.price);
+      });
       const priceTotal = totalPriceCart.reduce((a, b) => a + b);
       const cart = await Cart.findOne({where: {id: idCart}});
       await cart.update({totalPrice: priceTotal});
