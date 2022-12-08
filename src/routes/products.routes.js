@@ -6,7 +6,8 @@ const {
   getProducts, 
   createProducts, 
   updateProducts, 
-  deleteProducts 
+  deleteProducts,
+  getIdProducts, 
 } = require("../controllers");
 
 /**
@@ -95,6 +96,34 @@ const {
  *                   items:
  *                     $ref: "#/components/schemas/request_product"
  * /api/v1/products/{id}:
+ *   get:
+ *     security:
+ *       - bearerAuth: []
+ *     summary: See a product
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: product Id
+ *     responses:
+ *       200:
+ *         description: Data displayed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: "#/components/schemas/request_product"
  *   patch:
  *     security:
  *       - bearerAuth: []
@@ -166,6 +195,8 @@ router.post("/users/:id/products", authenticate, createProducts)
 router.get("/users/:id/products", authenticate, getProducts);
 
 router.get("/products", getProductsAll);
+
+router.get("/products/:id", authenticate, getIdProducts);
 
 router.patch("/products/:id", authenticate, updateProducts);
 

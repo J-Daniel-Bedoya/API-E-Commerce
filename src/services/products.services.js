@@ -28,26 +28,45 @@ class ProductsServices {
   }
   static async getProd(id) {
     try {
-        const result = await Users.findOne({
-          where: { id },
-          attributes: ["username"],
-          include: [
-            {
-              model: Products,
-              as: "products",
-              attributes: {
-                exclude: ["userId", "user_id", "categoryId", "category_id"]
-              },
-              include: {
-                model: Categories,
-                as: "category",
-                attributes: ["name_category"]
-              }
+      const result = await Users.findOne({
+        where: { id },
+        attributes: ["username"],
+        include: [
+          {
+            model: Products,
+            as: "products",
+            attributes: {
+              exclude: ["userId", "user_id", "categoryId", "category_id"]
             },
-          ]
-        });
-        // console.log(result.products)
-        return result;
+            include: {
+              model: Categories,
+              as: "category",
+              attributes: ["name_category"]
+            }
+          },
+        ]
+      });
+      return result;
+    } catch (error) {
+        throw(error); 
+    }
+  }
+  static async getIdProd(id) {
+    try {
+      const result = await Products.findOne({
+        where: { id },
+        attributes: {
+          exclude: ["userId", "user_id", "categoryId", "category_id"]
+        },
+        include: {
+          model: Categories,
+          as: "category",
+          attributes: ["name_category"]
+        }
+      });
+      const user = await Users.findOne({where: result.dataValues.userId})
+      console.log(user.dataValues.username)
+      return {username: user.dataValues.username, product: result};
     } catch (error) {
         throw(error); 
     }

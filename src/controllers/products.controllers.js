@@ -29,7 +29,20 @@ const getProducts = async (req, res, next) => {
           productsAvailable.push(e);
       }
     })
-    res.json({products: productsAvailable});
+    res.json({username: products.dataValues.username, products: productsAvailable});
+  } catch (error) {
+    next({
+        message: 'no se pudo obtener los productos',
+        status:400,
+        errorContent: error
+    })
+  }
+}
+const getIdProducts = async (req, res, next) => {
+  try {
+    const { id }  = req.params;
+    const result = await ProductsServices.getIdProd(id);
+    res.json({...result});
   } catch (error) {
     next({
         message: 'no se pudo obtener los productos',
@@ -86,4 +99,5 @@ module.exports = {
   createProducts,
   updateProducts,
   deleteProducts,
+  getIdProducts,
 };
