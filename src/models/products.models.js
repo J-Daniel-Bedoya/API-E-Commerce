@@ -15,8 +15,15 @@ const { DataTypes } = require("sequelize");
  *           type: number
  *           example: 4000
  *         image:
- *           type: string
- *           example: https://bit.ly/3Y1d0I7
+ *           type: array
+ *           example: [
+ *             https://bit.ly/3Y1d0I7, 
+ *             https://bit.ly/3Y1d0I7, 
+ *             https://bit.ly/3Y1d0I7
+ *           ]
+ *         description:
+ *           type: text
+ *           example: Escribe aquí cualquier cosa
  *         availableQty:
  *           type: number
  *           example: 5
@@ -39,8 +46,15 @@ const { DataTypes } = require("sequelize");
  *           type: number
  *           example: 4000
  *         image:
- *           type: string
- *           example: https://bit.ly/3Y1d0I7
+ *           type: array
+ *           example: [
+ *             https://bit.ly/3Y1d0I7, 
+ *             https://bit.ly/3Y1d0I7, 
+ *             https://bit.ly/3Y1d0I7
+ *           ]
+ *         description:
+ *           type: text
+ *           example: Escribe aquí cualquier cosa
  *         availableQty:
  *           type: number
  *           example: 5
@@ -60,8 +74,15 @@ const { DataTypes } = require("sequelize");
  *           type: number
  *           example: 4000
  *         image:
- *           type: string
- *           example: https://bit.ly/3Y1d0I7
+ *           type: array
+ *           example: [
+ *             https://bit.ly/3Y1d0I7, 
+ *             https://bit.ly/3Y1d0I7, 
+ *             https://bit.ly/3Y1d0I7
+ *           ]
+ *         description:
+ *           type: text
+ *           example: Escribe aquí cualquier cosa
  *         availableQty:
  *           type: number
  *           example: 5
@@ -96,8 +117,12 @@ const Products = db.define(
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
     availableQty: {
       type: DataTypes.INTEGER,
