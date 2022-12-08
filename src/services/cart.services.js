@@ -60,16 +60,16 @@ class CartServices {
           const price = pro.quantity * priceProduct.price;
           await pro.update({price: price});
         }
+        const totalPriceCartArray = await ProductInCart.findAll();
+        const cart = await Cart.findOne({where: {id: idCart}});
+        const totalPriceCart = [];
+        totalPriceCartArray.forEach( async(total) => { 
+          totalPriceCart.push(total.price);
+          const priceTotal = totalPriceCart.reduce((a, b) => a + b);
+          await cart.update({totalPrice: priceTotal});
+        });
       })
 
-      const totalPriceCartArray = await ProductInCart.findAll();
-      const totalPriceCart = [];
-      totalPriceCartArray.forEach(total => { 
-        totalPriceCart.push(total.price);
-      });
-      const priceTotal = totalPriceCart.reduce((a, b) => a + b);
-      const cart = await Cart.findOne({where: {id: idCart}});
-      await cart.update({totalPrice: priceTotal});
 
       return prod;
     } catch (error) {
