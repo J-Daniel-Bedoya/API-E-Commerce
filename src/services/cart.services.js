@@ -79,7 +79,7 @@ class CartServices {
   static async delCart(idCart, idProduct) {
     try {
       const prod = await ProductInCart.findAll({ where: { cartId: idCart } })
-      prod.map(pro => {
+      prod.map( async(pro) => {
         if (Number(idProduct) === pro.dataValues.productId){
           pro.destroy()
         }
