@@ -23,6 +23,14 @@ class CartServices {
           }
         },
       });
+      const totalPriceCartArray = await ProductInCart.findAll();
+      const cart = await Cart.findOne({where: {id}});
+      const totalPriceCart = [];
+      totalPriceCartArray.forEach( async(total) => { 
+        totalPriceCart.push(total.price);
+        const priceTotal = totalPriceCart.reduce((a, b) => a + b);
+        await cart.update({totalPrice: priceTotal});
+      });
       return result;
     } catch (error) {
       throw error;
