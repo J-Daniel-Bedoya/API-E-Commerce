@@ -23,7 +23,7 @@ const iteracion = (arr) => {
 
 }
 
-console.log(iteracion(numbers));
+// console.log(iteracion(numbers));
 
 const sort = arr => {
   let i = 0
@@ -46,3 +46,21 @@ const sort = arr => {
 }
 
 // console.log(`Costo: ${sort([4,2,9,1,3,5])}`)
+
+const script = () => {
+  for(let i = 1; i < 100; i++) {
+    const numMul3 = i % 3;
+    const numMul5 = i % 5;
+    if(numMul3 === 0 && numMul5 === 0) {
+      console.log("SiteHost");
+    }else if(numMul3 === 0) {
+      console.log("Sitio");
+    }else if(numMul5 === 0) {
+      console.log("Host");
+    }else {
+      console.log(i)
+    }
+  }
+}
+
+console.log(script())

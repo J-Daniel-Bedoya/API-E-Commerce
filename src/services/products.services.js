@@ -65,8 +65,8 @@ class ProductsServices {
         }
       });
       const user = await Users.findOne({where: result.dataValues.userId})
-      console.log(user.dataValues.username)
-      return {username: user.dataValues.username, product: result};
+      // console.log(user.dataValues.username)
+      return {username: user.dataValues.username, id: user.dataValues.id, product: result};
     } catch (error) {
         throw(error); 
     }
