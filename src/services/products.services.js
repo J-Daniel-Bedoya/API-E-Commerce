@@ -12,7 +12,7 @@ class ProductsServices {
             {
               model: Users,
               as: "user",
-              attributes: ["username"]
+              attributes: ["id", "username"]
             },
             {
               model: Categories,
@@ -66,7 +66,7 @@ class ProductsServices {
       });
       const user = await Users.findOne({where: result.dataValues.userId})
       // console.log(user.dataValues.username)
-      return {username: user.dataValues.username, id: user.dataValues.id, product: result};
+      return {id: user.dataValues.id, username: user.dataValues.username, product: result};
     } catch (error) {
         throw(error); 
     }
