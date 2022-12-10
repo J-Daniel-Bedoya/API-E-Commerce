@@ -50,7 +50,7 @@ class OrdersServices {
       allProducts.forEach( async(prod) => {
         await prod.destroy();
       })
-      return result;
+      return order;
     } catch (error) {
       throw error;
     }
@@ -77,13 +77,28 @@ class OrdersServices {
 
       });
       const purchase = await Orders.findAll();
+      const quantityProd = await ProductsInOrder.findAll();
       const total = [];
+      let quantityArrProd = 0;
+
       purchase.forEach(purh => {
-        total.push(purh.dataValues.totalPrice)
+        total.push(purh.dataValues.totalPrice);
       })
+      for(let i = 0; i < 1; i++){
+        const arrQuantity = [];
+        quantityProd.forEach(quan => {
+          arrQuantity.push(quan.dataValues.quantity);
+        })
+
+        const aditionArrQuantity = arrQuantity.reduce((a,b) => a+b);
+        quantityArrProd = aditionArrQuantity
+      }
+
+
       const priceTotal = total.reduce((a,b) => a + b);
       result.dataValues.totalPrice = priceTotal;
- 
+      result.dataValues.totalProducts = quantityArrProd;
+
       return result;
     } catch (error) {
       throw error;
