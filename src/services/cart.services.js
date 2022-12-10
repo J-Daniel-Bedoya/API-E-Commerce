@@ -29,7 +29,7 @@ class CartServices {
       totalPriceCartArray.forEach( async(total) => { 
         totalPriceCart.push(total.price);
         const priceTotal = totalPriceCart.reduce((a, b) => a + b);
-        await cart.update({totalPrice: priceTotal});
+        await cart?.update({totalPrice: priceTotal});
       });
       return result;
     } catch (error) {
