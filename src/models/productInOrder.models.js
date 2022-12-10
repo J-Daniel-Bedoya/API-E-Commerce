@@ -45,6 +45,11 @@ const ProductsInOrder = db.define(
       autoIncrement: true,
       allowNull: false,
     },
+    nameProduct: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      field: "name_product",
+    },
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: true,

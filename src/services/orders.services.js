@@ -23,6 +23,7 @@ class OrdersServices {
         const product = await Products.findOne({where: prod.productId});
         // const images = ;
         const orderProducts = await ProductsInOrder.create({
+          nameProduct: product.dataValues.name,
           quantity: prod.quantity,
           price: prod.price,
           status: prod.status,
