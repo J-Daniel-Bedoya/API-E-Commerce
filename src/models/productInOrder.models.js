@@ -53,6 +53,10 @@ const ProductsInOrder = db.define(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    images: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+    },
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

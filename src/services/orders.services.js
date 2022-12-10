@@ -21,12 +21,14 @@ class OrdersServices {
 
       allProducts.forEach( async(prod) => {
         const product = await Products.findOne({where: prod.productId});
-        const orderProducts =  ProductsInOrder.create({
+        // const images = ;
+        const orderProducts = await ProductsInOrder.create({
           quantity: prod.quantity,
           price: prod.price,
           status: prod.status,
           orderId: order.id,
           productId: prod.productId,
+          images: product.dataValues.image,
         });
         
         product.update({availableQty: product.availableQty - prod.quantity});
@@ -71,13 +73,16 @@ class OrdersServices {
               as: "orders",
               attributes: {
                 exclude: ["orderId", "order_id", "productId", "product_id"]
-              }
-            }
-        }
+              },
+            },
+            
+        },
+        
 
       });
       const purchase = await Orders.findAll();
       const quantityProd = await ProductsInOrder.findAll();
+      console.log(quantityProd)
       const total = [];
       let quantityArrProd = 0;
 
