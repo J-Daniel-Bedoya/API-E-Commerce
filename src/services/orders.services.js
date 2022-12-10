@@ -4,7 +4,7 @@ const orderTemplate = require("../templates/newOrder");
 
 class OrdersServices {
 
-  static async postOrder(id, body) {
+  static async postOrder(id) {
     try {
       const allProducts = await ProductInCart.findAll();
       const cart = await Cart.findOne({where:{ id }});
@@ -50,7 +50,7 @@ class OrdersServices {
       allProducts.forEach( async(prod) => {
         await prod.destroy();
       })
-      return order;
+      return result;
     } catch (error) {
       throw error;
     }
@@ -76,6 +76,13 @@ class OrdersServices {
         }
 
       });
+      const purchase = await Orders.findAll();
+      const total = [];
+      purchase.forEach(purh => {
+        total.push(purh.dataValues.totalPrice)
+      })
+      const priceTotal = total.reduce((a,b) => a + b);
+      result.dataValues.totalPrice = priceTotal;
  
       return result;
     } catch (error) {
