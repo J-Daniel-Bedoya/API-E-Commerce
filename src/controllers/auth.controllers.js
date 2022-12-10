@@ -7,11 +7,11 @@ const userLogin = async (req, res, next) => {
     const result = await AuthServices.authenticate(credentials);
 
     if (result) {
-      const { email, password } = result.result;
+      const { email, password } = result.user;
       const user = { email, password };
       const token = AuthServices.genToken(user);
-      user.token = token;
-      res.status(201).json({ result });
+      result.token = token;
+      res.status(201).json(result);
     } else {
       res.status(400).json({ message: "Información inválida" });
     }

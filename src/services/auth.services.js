@@ -11,10 +11,13 @@ class AuthServices {
       const { email, password } = credentials;
       const result = await Users.findOne({
         where: { email },
+        attributes: {
+          exclude: ["createdAt", "updatedAt"]
+        }
       });
       if (result) {
         const isValid = bcrypt.compareSync(password, result.password);
-        return isValid ? { isValid, result } : isValid;
+        return isValid ? { isValid, user: result } : isValid;
       } else {
         return result;
       }
