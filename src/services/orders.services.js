@@ -90,6 +90,7 @@ class OrdersServices {
       purchase.forEach(purh => {
         total.push(purh.dataValues.totalPrice);
       })
+      
       for(let i = 0; i < 1; i++){
         const arrQuantity = [];
         quantityProd.forEach(quan => {
@@ -99,7 +100,6 @@ class OrdersServices {
         const aditionArrQuantity = arrQuantity.reduce((a,b) => a+b);
         quantityArrProd = aditionArrQuantity
       }
-
 
       const priceTotal = total.reduce((a,b) => a + b);
       result.dataValues.totalPrice = priceTotal;

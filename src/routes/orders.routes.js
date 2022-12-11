@@ -64,7 +64,7 @@ const { createOrder, getOrder } = require("../controllers");
  *                     $ref: "#/components/schemas/request_order"
  */
 
-router.post("/users/:id/orders", authenticate, createOrder)
+router.post("/users/:id/orders", createOrder)
 
 router.get("/users/:id/orders", authenticate, getOrder);
 

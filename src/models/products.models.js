@@ -121,7 +121,7 @@ const Products = db.define(
       allowNull: true,
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     availableQty: {
