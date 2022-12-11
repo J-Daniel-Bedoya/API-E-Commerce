@@ -84,26 +84,21 @@ class OrdersServices {
       const purchase = await Orders.findAll();
       const quantityProd = await ProductsInOrder.findAll();
       console.log(quantityProd)
-      const total = [];
-      let quantityArrProd = 0;
+      const arrPrice = [];
+      const arrQuantity = [];
 
-      purchase.forEach(purh => {
-        total.push(purh.dataValues.totalPrice);
-      })
-      
-      for(let i = 0; i < 1; i++){
-        const arrQuantity = [];
-        quantityProd.forEach(quan => {
-          arrQuantity.push(quan.dataValues.quantity);
+      purchase.forEach(orders => {
+        orders.dataValues.forEach(purch => {
+          arrPrice.push(purch.dataValues.price);
+          arrQuantity.push(purch.dataValues.quantity);
         })
+      })
 
-        const aditionArrQuantity = arrQuantity.reduce((a,b) => a+b);
-        quantityArrProd = aditionArrQuantity
-      }
+      const aditionArrQuantity = arrQuantity.reduce((a,b) => a+b);
+      const priceTotal = arrPrice.reduce((a,b) => a + b);
 
-      const priceTotal = total.reduce((a,b) => a + b);
       result.dataValues.totalPrice = priceTotal;
-      result.dataValues.totalProducts = quantityArrProd;
+      result.dataValues.totalProducts = aditionArrQuantity;
 
       return result;
     } catch (error) {
