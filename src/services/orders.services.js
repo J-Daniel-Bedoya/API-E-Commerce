@@ -81,17 +81,14 @@ class OrdersServices {
         
 
       });
-      const purchase = await Orders.findAll();
+      // const purchase = await Orders.findAll();
       const quantityProd = await ProductsInOrder.findAll();
-      console.log(quantityProd)
       const arrPrice = [];
       const arrQuantity = [];
-
-      purchase.forEach(orders => {
-        orders.dataValues.forEach(purch => {
-          arrPrice.push(purch.dataValues.price);
-          arrQuantity.push(purch.dataValues.quantity);
-        })
+      
+      quantityProd?.forEach(purch => {
+        arrPrice.push(purch.dataValues.price);
+        arrQuantity.push(purch.dataValues.quantity);
       })
 
       const aditionArrQuantity = arrQuantity.reduce((a,b) => a+b);
