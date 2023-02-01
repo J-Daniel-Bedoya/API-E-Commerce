@@ -9,8 +9,8 @@ const initModels = () => {
   
   //U:M
   
-  Products.belongsTo(Categories, { as: "category", foreignKey: "category_id" })
-  Categories.hasMany(Products, { as: "categorie", foreignKey: "category_id" })
+  Products.belongsTo(Categories, { as: "category", foreignKey: "category_id" });
+  Categories.hasMany(Products, { as: "categorie", foreignKey: "category_id" });
 
   // U:U
 
@@ -24,19 +24,19 @@ const initModels = () => {
 
   // M:M
 
-  ProductsInOrder.belongsTo(Orders, { foreignKey: "order_id" })
-  Orders.hasMany(ProductsInOrder, { as: "orders", foreignKey: "order_id" })
+  ProductsInOrder.belongsTo(Orders, { foreignKey: "order_id" });
+  Orders.hasMany(ProductsInOrder, { as: "orders", foreignKey: "order_id" });
 
-  ProductsInOrder.belongsTo(Products, { as: "produ", foreignKey: "product_id" })
-  Products.hasMany(ProductsInOrder, { as: "prod", foreignKey: "product_id" })
+  ProductsInOrder.belongsTo(Products, { as: "produ", foreignKey: "product_id" });
+  Products.hasMany(ProductsInOrder, { as: "prod", foreignKey: "product_id" });
 
   // M:M
 
-  ProductInCart.belongsTo(Cart, { foreignKey: "cart_id" })
-  Cart.hasMany(ProductInCart, { as: "products", foreignKey: "cart_id" })
+  ProductInCart.belongsTo(Cart, { foreignKey: "cart_id" });
+  Cart.hasMany(ProductInCart, { as: "products", foreignKey: "cart_id" });
 
-  ProductInCart.belongsTo(Products, { foreignKey: "product_id" })
-  Products.hasMany(ProductInCart, {  as: "product", foreignKey: "product_id" })
+  ProductInCart.belongsTo(Products, { foreignKey: "product_id" });
+  Products.hasMany(ProductInCart, {  as: "product", foreignKey: "product_id" });
 
 };
 
